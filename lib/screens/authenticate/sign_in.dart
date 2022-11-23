@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_advising_app/screens/authenticate/forgot_password.dart';
 import 'package:student_advising_app/services/auth.dart';
 import '../../shared/constants.dart';
 import '../../shared/loading.dart';
@@ -83,7 +84,25 @@ class _SignInState extends State<SignIn> {
                               color: Colors.white,
                             )),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ForgotPassword();
+                              }));
+                            },
+                            child: Text("Forgot Password?",
+                                style: TextStyle(
+                                    color: Colors.indigo[200],
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
                       TextButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {

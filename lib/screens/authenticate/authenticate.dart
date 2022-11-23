@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student_advising_app/screens/authenticate/forgot_password.dart';
 import 'package:student_advising_app/screens/authenticate/register.dart';
 import 'package:student_advising_app/screens/authenticate/sign_in.dart';
 
