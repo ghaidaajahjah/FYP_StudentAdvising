@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:student_advising_app/screens/authenticate/verify.dart';
 import 'package:student_advising_app/shared/loading.dart';
 import '../../services/auth.dart';
 import '../../shared/constants.dart';
@@ -99,7 +100,8 @@ class _RegisterState extends State<Register> {
                               });
                               print(error);
                             } else {
-                              print('Something is wrong');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => VerifyEmail()));
                             }
                           }
                         },
@@ -116,9 +118,11 @@ class _RegisterState extends State<Register> {
                             )),
                       ),
                       SizedBox(height: 12),
-                      Text(
-                        error,
-                        style: TextStyle(color: Colors.red, fontSize: 14),
+                      Center(
+                        child: Text(
+                          error,
+                          style: TextStyle(color: Colors.red, fontSize: 14),
+                        ),
                       )
                     ]),
               ),

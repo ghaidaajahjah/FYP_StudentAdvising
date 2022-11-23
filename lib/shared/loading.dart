@@ -11,7 +11,7 @@ class Loading extends StatelessWidget {
       child: Center(
           child: SpinKitPouringHourGlass(
         color: Colors.white,
-        size: 80,
+        size: 100,
       )),
     );
   }
