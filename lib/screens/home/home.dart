@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:student_advising_app/models/user.dart';
 import 'package:student_advising_app/services/auth.dart';
+import 'package:student_advising_app/services/database.dart';
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();

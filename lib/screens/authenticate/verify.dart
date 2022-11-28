@@ -43,7 +43,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('An email has been sent to ${user.email}. Please verify'),
+        child: Padding(
+          padding: const EdgeInsets.all(40),
+          child: Flexible(
+              child: Text(
+                  'An email has been sent to ${user.email} Please verify',
+                  style: TextStyle(fontSize: 18))),
+        ),
       ),
     );
   }

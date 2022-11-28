@@ -1,28 +1,42 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:student_advising_app/services/database.dart';
 import '../models/user.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  StreamController<MyUser?> userStreamController = StreamController<MyUser?>();
 
+  AuthService() {
+    _auth.authStateChanges().listen((event) async {
+      MyUser? myUser = await _userFromFirebaseUser(event);
+      userStreamController.sink.add(myUser);
+    });
+  }
   //create user object based on firebase user
-  MyUser? _userFromFirebaseUser(User? user) {
-    return user != null ? MyUser(email: user.email) : null;
+  Future<MyUser?> _userFromFirebaseUser(User? user) async {
+    if (user == null) {
+      return null;
+    } else {
+      return await Database().getUser(user.uid);
+    }
   }
 
   //auth change user stream
   Stream<MyUser?> get user {
-    return _auth
-        .authStateChanges()
-        .map((User? user) => _userFromFirebaseUser(user));
+    return userStreamController.stream;
   }
 
   //sign in with email and pass
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signInWithEmailAndPassword(
+      MyUser myUser, String email, String password) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = credential.user;
+      await Database().updateUserData(myUser);
       print(user);
       return _userFromFirebaseUser(user);
     } catch (e) {

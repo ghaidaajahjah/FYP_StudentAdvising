@@ -23,6 +23,8 @@ class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String error = '';
+  bool? isAdvisor = false;
+
   @override
   Widget build(BuildContext context) {
     return loading
@@ -84,6 +86,15 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                         obscureText: true,
+                      ),
+                      CheckboxListTile(
+                        value: isAdvisor,
+                        title: Text("Are you an advisor?"),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isAdvisor = value;
+                          });
+                        },
                       ),
                       SizedBox(height: 20),
                       TextButton(
