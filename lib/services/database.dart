@@ -9,6 +9,9 @@ class Database {
   Future<void> updateUserData(MyUser user) async {
     userCollection.doc(user.uid).set({
       "email": user.email,
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "major": user.major,
       "isAdvisor": user.isADvisor,
     });
   }
@@ -17,6 +20,9 @@ class Database {
     return MyUser(
         email: snapshot.get("email"),
         uid: snapshot.id,
+        firstName: snapshot.get("firstName"),
+        lastName: snapshot.get("lastName"),
+        major: snapshot.get("major"),
         isADvisor: snapshot.get("isAdvisor"));
   }
 

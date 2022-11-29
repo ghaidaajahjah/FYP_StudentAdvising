@@ -30,13 +30,12 @@ class AuthService {
   }
 
   //sign in with email and pass
-  Future signInWithEmailAndPassword(
-      MyUser myUser, String email, String password) async {
+  Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = credential.user;
-      await Database().updateUserData(myUser);
+
       print(user);
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -46,13 +45,15 @@ class AuthService {
   }
 
   //register with email and pass
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future<MyUser?> registerWithEmailAndPassword(
+      MyUser myUser, String password) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: myUser.email, password: password);
       User? user = credential.user;
+      myUser.uid = user?.uid;
       print(user);
-      return _userFromFirebaseUser(user);
+      return myUser;
     } catch (e) {
       print(e.toString());
       return null;

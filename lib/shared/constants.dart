@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 dynamic textInputDecoration = InputDecoration(
-  contentPadding: EdgeInsets.symmetric(vertical: 20.0),
+  contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
   enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
       borderSide: BorderSide(color: Colors.indigo.shade200, width: 2)),
