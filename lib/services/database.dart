@@ -12,18 +12,32 @@ class Database {
       "firstName": user.firstName,
       "lastName": user.lastName,
       "major": user.major,
+      "profilePic": user.profilePic,
       "isAdvisor": user.isADvisor,
     });
   }
 
   MyUser mapUser(DocumentSnapshot snapshot) {
     return MyUser(
-        email: snapshot.get("email"),
+        email: snapshot.data().toString().contains('email')
+            ? snapshot.get('email')
+            : '',
         uid: snapshot.id,
-        firstName: snapshot.get("firstName"),
-        lastName: snapshot.get("lastName"),
-        major: snapshot.get("major"),
-        isADvisor: snapshot.get("isAdvisor"));
+        firstName: snapshot.data().toString().contains('firstName')
+            ? snapshot.get('firstName')
+            : '',
+        lastName: snapshot.data().toString().contains('lastName')
+            ? snapshot.get('lastName')
+            : '',
+        major: snapshot.data().toString().contains('major')
+            ? snapshot.get('major')
+            : '',
+        profilePic: snapshot.data().toString().contains('profilePic')
+            ? snapshot.get('profilePic')
+            : '',
+        isADvisor: snapshot.data().toString().contains('isAdvisor')
+            ? snapshot.get('isAdvisor')
+            : false);
   }
 
   Future<MyUser> getUser(String uid) async {

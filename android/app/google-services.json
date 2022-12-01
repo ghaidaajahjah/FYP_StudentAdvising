@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "736065875478",
-    "project_id": "fyp-student-advising",
-    "storage_bucket": "fyp-student-advising.appspot.com"
+    "project_number": "334685319231",
+    "project_id": "eece-502---student-advising",
+    "storage_bucket": "eece-502---student-advising.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:736065875478:android:f84d64c1c476f607dfcf37",
+        "mobilesdk_app_id": "1:334685319231:android:59bc8a5b3972eb8f57088a",
         "android_client_info": {
-          "package_name": "com.fyp.student_advising_app"
+          "package_name": "com.finalyearproject.studentadvising"
         }
       },
       "oauth_client": [
         {
-          "client_id": "736065875478-q40e460t3va203cimd570flps1hfh9fo.apps.googleusercontent.com",
+          "client_id": "334685319231-o3tdlom8b543g45k3ki56ht46evieqbu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuVVIOE-ETln9feKXNHvmWq6RDZrrnay8"
+          "current_key": "AIzaSyBhlh0tHCggEbss2psl8GkDcBSgrUW2GbA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "736065875478-q40e460t3va203cimd570flps1hfh9fo.apps.googleusercontent.com",
+              "client_id": "334685319231-o3tdlom8b543g45k3ki56ht46evieqbu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

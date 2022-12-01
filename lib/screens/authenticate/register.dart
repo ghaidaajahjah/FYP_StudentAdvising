@@ -27,8 +27,10 @@ class _RegisterState extends State<Register> {
   String lastName = '';
   String major = '';
   String password = '';
+  String profilePic =
+      "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png";
   String error = '';
-  bool? isAdvisor = false;
+  bool isAdvisor = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,23 +99,26 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          validator: (value) =>
-                              value!.isEmpty ? 'Enter your major field' : null,
-                          onChanged: (val) {
-                            setState(() {
-                              major = val;
-                            });
-                          },
-                          decoration: textInputDecoration.copyWith(
-                            hintText: 'Major',
-                            prefixIcon: Icon(
-                              Icons.engineering,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
+                        !isAdvisor
+                            ? TextFormField(
+                                validator: (value) => value!.isEmpty
+                                    ? 'Enter your major field'
+                                    : null,
+                                onChanged: (val) {
+                                  setState(() {
+                                    major = val;
+                                  });
+                                },
+                                decoration: textInputDecoration.copyWith(
+                                  hintText: 'Major',
+                                  prefixIcon: Icon(
+                                    Icons.engineering,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(height: 0),
+                        !isAdvisor ? SizedBox(height: 20) : SizedBox(height: 0),
                         TextFormField(
                           validator: (value) =>
                               value!.isEmpty ? 'Enter an email please' : null,
@@ -170,6 +175,7 @@ class _RegisterState extends State<Register> {
                                           firstName: firstName,
                                           lastName: lastName,
                                           major: major,
+                                          profilePic: profilePic,
                                           isADvisor: isAdvisor),
                                       password);
 
