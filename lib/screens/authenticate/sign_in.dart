@@ -50,6 +50,7 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      SizedBox(height: 40),
                       TextFormField(
                         validator: (value) =>
                             value!.isEmpty ? 'Enter an email please' : null,
@@ -86,7 +87,7 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -102,7 +103,7 @@ class _SignInState extends State<SignIn> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 40),
                       TextButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {

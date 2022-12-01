@@ -30,8 +30,17 @@ class _RegisterState extends State<Register> {
   String profilePic =
       "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png";
   String error = '';
-  bool isAdvisor = false;
-
+  bool? isAdvisor = false;
+  List<String> majors = <String>[
+    'ARCHITECTURE AND DESIGN',
+    'BIOMEDICAL ENGINEERING',
+    'CIVIL AND ENVIRONMENTAL ENGINEERING',
+    'CHEMICAL ENGINEERING',
+    'ELECTRICAL AND COMPUTER ENGINEERING',
+    'INDUSTRIAL ENGINEERING AND MANAGEMENT',
+    'MECHANICAL ENGINEERING'
+  ];
+  String? dropdownvalue;
   @override
   Widget build(BuildContext context) {
     return loading
@@ -66,6 +75,7 @@ class _RegisterState extends State<Register> {
                             Expanded(
                               flex: 1,
                               child: TextFormField(
+                                cursorColor: Colors.indigo,
                                 validator: (value) => value!.isEmpty
                                     ? 'Enter you first name please'
                                     : null,
@@ -83,6 +93,7 @@ class _RegisterState extends State<Register> {
                             Expanded(
                               flex: 1,
                               child: TextFormField(
+                                cursorColor: Colors.indigo,
                                 validator: (value) => value!.isEmpty
                                     ? 'Enter your last name please'
                                     : null,
@@ -99,27 +110,44 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                         SizedBox(height: 20),
-                        !isAdvisor
-                            ? TextFormField(
-                                validator: (value) => value!.isEmpty
-                                    ? 'Enter your major field'
-                                    : null,
-                                onChanged: (val) {
-                                  setState(() {
-                                    major = val;
-                                  });
-                                },
-                                decoration: textInputDecoration.copyWith(
-                                  hintText: 'Major',
-                                  prefixIcon: Icon(
-                                    Icons.engineering,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              )
-                            : SizedBox(height: 0),
-                        !isAdvisor ? SizedBox(height: 20) : SizedBox(height: 0),
+                        DropdownButtonFormField<String?>(
+                          borderRadius: BorderRadius.circular(30),
+                          isExpanded: true,
+                          hint: Text('Department'),
+                          autofocus: true,
+                          value: dropdownvalue,
+                          elevation: 16,
+                          decoration: textInputDecoration.copyWith(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 5),
+                            prefixIcon: Icon(
+                              Icons.engineering,
+                              color: Colors.white,
+                            ),
+                          ),
+                          validator: (value) => value == null
+                              ? 'Please select your department'
+                              : null,
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownvalue = value!;
+                            });
+                          },
+                          items: majors
+                              .map<DropdownMenuItem<String?>>((String value) {
+                            return DropdownMenuItem<String?>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(height: 20),
                         TextFormField(
+                          cursorColor: Colors.indigo,
                           validator: (value) =>
                               value!.isEmpty ? 'Enter an email please' : null,
                           onChanged: (val) {
@@ -137,6 +165,7 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
+                          cursorColor: Colors.indigo,
                           validator: (value) => value!.length < 6
                               ? ' The password should be at least 6 characters '
                               : null,

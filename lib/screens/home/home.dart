@@ -8,6 +8,7 @@ import 'package:student_advising_app/models/user.dart';
 import 'package:student_advising_app/screens/map/mapScreen.dart';
 import 'package:student_advising_app/screens/profile/profilePicScreen.dart';
 import 'package:student_advising_app/screens/wrapper.dart';
+import 'package:student_advising_app/screens/chat/chatList.dart';
 import 'package:student_advising_app/services/auth.dart';
 import 'package:student_advising_app/services/database.dart';
 
