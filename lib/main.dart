@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_advising_app/models/user.dart';
+import 'package:student_advising_app/screens/profile/profilePicScreen.dart';
 import 'package:student_advising_app/screens/wrapper.dart';
 import 'package:student_advising_app/services/auth.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         home: Wrapper(),
+        routes: {'/profile': (context) => profilePicScreen()},
       ),
     );
   }

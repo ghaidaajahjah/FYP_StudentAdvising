@@ -17,7 +17,7 @@ class profilePicScreen extends StatefulWidget {
 class _profilePicScreenState extends State<profilePicScreen> {
   String picURL = " ";
 
-  void pickUploadImage(MyUser? user) async {
+  Future pickUploadImage(MyUser? user) async {
     final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
         maxWidth: 512,
@@ -30,13 +30,13 @@ class _profilePicScreenState extends State<profilePicScreen> {
           FirebaseStorage.instance.ref().child("profilePics/" + userUid);
       print("path: " + image!.path);
       await ref.putFile(File(image.path));
-      ref.getDownloadURL().then((value) {
+      ref.getDownloadURL().then((value) async {
         print("value: " + value);
         setState(() {
           picURL = value;
         });
         user.profilePic = value;
-        Database().updateUserData(user);
+        await Database().updateUserData(user);
       });
     }
   }
@@ -60,13 +60,16 @@ class _profilePicScreenState extends State<profilePicScreen> {
               child: Column(children: [
         SizedBox(height: 10),
         Image(
-            image: NetworkImage(picURL == " " ? user!.profilePic : picURL),
+            image: NetworkImage(picURL == " " ? user!.profilePic! : picURL),
             width: 200,
             height: 200),
         SizedBox(height: 10),
         Text("${user?.firstName} ${user?.lastName}"),
         TextButton(
-            onPressed: () => pickUploadImage(user),
+            onPressed: () async {
+              await pickUploadImage(user);
+              setState(() {});
+            },
             child: Text("Change Avatar"))
       ]))),
     );

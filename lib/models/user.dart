@@ -4,7 +4,7 @@ class MyUser {
   final String? lastName;
   final String? major;
   final String email;
-  late final String profilePic;
+  String? profilePic;
   final bool? isADvisor;
 
   MyUser(

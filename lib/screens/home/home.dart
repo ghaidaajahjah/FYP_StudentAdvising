@@ -12,6 +12,8 @@ import 'package:student_advising_app/screens/chat/chatList.dart';
 import 'package:student_advising_app/services/auth.dart';
 import 'package:student_advising_app/services/database.dart';
 
+import 'drawer.dart';
+
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
@@ -21,23 +23,37 @@ class Home extends StatelessWidget {
     final String profilePic = user?.profilePic as String;
     return Scaffold(
         backgroundColor: Colors.indigo[200],
+        drawer: NavDrawer(),
         appBar: AppBar(
           title: const Text("Home"),
           backgroundColor: Colors.indigo[400],
           elevation: 0.0,
-          leading:
-              Image(image: NetworkImage(profilePic), width: 20, height: 20),
           actions: <Widget>[
-            TextButton.icon(
-                // ignore: prefer_const_constructors
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.indigo[200],
-                ),
-                onPressed: () async {
-                  await _auth.signOut();
+            PopupMenuButton(
+                onSelected: (value) {
+                  if (value == 0) {
+                    Navigator.pushNamed(context, '/profile');
+                  }
                 },
-                icon: const Icon(Icons.arrow_circle_right_outlined),
-                label: const Text('')),
+                icon: CircleAvatar(
+                  backgroundImage: NetworkImage(profilePic),
+                  radius: 20,
+                ),
+                itemBuilder: ((context) {
+                  return [
+                    PopupMenuItem(
+                      value: 0,
+                      child: Text('Profile'),
+                    ),
+                    PopupMenuItem(child: Text('Settings')),
+                    PopupMenuItem(
+                      child: Text('Logout'),
+                      onTap: () {
+                        _auth.signOut();
+                      },
+                    ),
+                  ];
+                }))
           ],
         ),
         body: Container(
@@ -50,7 +66,7 @@ class Home extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 40),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 90),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Column(
                   children: [
@@ -61,13 +77,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.edit_calendar_rounded,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Schedule",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -84,13 +101,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.chat,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Chats",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -111,13 +129,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.thumb_up,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Course Feedback",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -134,13 +153,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.book,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Course Planning",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -161,13 +181,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.work,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Career Planning",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -184,13 +205,14 @@ class Home extends StatelessWidget {
                             minWidth: 120,
                             maxWidth: 120),
                         child: Container(
-                            decoration:
-                                BoxDecoration(color: Colors.indigo[400]),
+                            decoration: BoxDecoration(
+                                color: Colors.indigo[400],
+                                borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.meeting_room,
-                                    size: 80, color: Colors.white),
+                                    size: 60, color: Colors.white),
                                 const Text("Meetings",
                                     style: TextStyle(color: Colors.white)),
                               ],
@@ -199,33 +221,33 @@ class Home extends StatelessWidget {
                 )
               ]),
               const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return profilePicScreen();
-                  }));
-                },
-                child: Text("Profile",
-                    style: TextStyle(
-                        backgroundColor: Colors.indigo[400],
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const MapScreen();
-                  }));
-                },
-                child: Text("Campus Guide",
-                    style: TextStyle(
-                        backgroundColor: Colors.indigo[400],
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        fontWeight: FontWeight.bold)),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //       return profilePicScreen();
+              //     }));
+              //   },
+              //   child: Text("Profile",
+              //       style: TextStyle(
+              //           backgroundColor: Colors.indigo[400],
+              //           color: const Color.fromARGB(255, 255, 255, 255),
+              //           fontWeight: FontWeight.bold)),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //       return const MapScreen();
+              //     }));
+              //   },
+              //   child: Text("Campus Guide",
+              //       style: TextStyle(
+              //           backgroundColor: Colors.indigo[400],
+              //           color: const Color.fromARGB(255, 255, 255, 255),
+              //           fontWeight: FontWeight.bold)),
+              // ),
             ],
           ),
         ));

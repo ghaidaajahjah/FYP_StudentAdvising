@@ -7,7 +7,7 @@ class Database {
       FirebaseFirestore.instance.collection("userCollection");
 
   Future<void> updateUserData(MyUser user) async {
-    userCollection.doc(user.uid).set({
+    await userCollection.doc(user.uid).set({
       "email": user.email,
       "firstName": user.firstName,
       "lastName": user.lastName,
